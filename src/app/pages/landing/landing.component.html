@@ -1,0 +1,182 @@
+<!-- landing-page.component.html -->
+<div
+    class="min-h-screen flex flex-col bg-[#fbf8fc] text-[#1b1b1e] overflow-x-hidden relative"
+>
+    <!-- Background -->
+    <div class="absolute inset-0 bg-grid opacity-30 pointer-events-none"></div>
+
+    <div
+        class="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-[128px] pointer-events-none"
+    ></div>
+
+    <div
+        class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] pointer-events-none"
+    ></div>
+
+    <!-- Hero -->
+    <main
+        class="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pt-18 pb-8"
+    >
+        <section class="w-full max-w-4xl text-center">
+            <!-- Badge -->
+            <div
+                class="mb-8 inline-flex items-center gap-2 rounded-full border border-[#c7c4d7] bg-white px-4 py-2"
+            >
+                <span
+                    class="h-2 w-2 animate-pulse rounded-full bg-indigo-600"
+                ></span>
+
+                <span
+                    class="text-[11px] uppercase tracking-[0.2em] text-gray-600 font-semibold"
+                >
+                    Building the Future of Monitoring
+                </span>
+            </div>
+
+            <!-- Heading -->
+            <h1
+                class="mb-6 text-5xl font-semibold leading-tight tracking-tight md:text-7xl"
+            >
+                Timber Dashboard is
+                <br />
+
+                <span
+                    class="bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent"
+                >
+                    Comming Soon </span
+                >.
+            </h1>
+
+            <!-- Description -->
+            <p
+                class="mx-auto mb-10 max-w-2xl text-base leading-7 text-gray-600 md:text-lg"
+            >
+                Timber's Dashboard is currently under construction.
+            </p>
+
+            <!-- Terminal Card -->
+            <div class="relative mx-auto mt-10 max-w-3xl rotate-1">
+                <!-- Floating Badge -->
+                <!-- <div
+                    class="absolute -top-4 -right-4 z-20 rotate-12 rounded-xl bg-blue-600 px-4 py-3 text-center text-white shadow-xl"
+                >
+                    <p class="text-[11px] uppercase tracking-widest">Coming</p>
+
+                    <p class="text-lg font-bold">Q4 2024</p>
+                </div> -->
+
+                <!-- Glass Panel -->
+                <div
+                    class="overflow-hidden rounded-2xl border border-[#c7c4d7] bg-white/70 p-5 text-left shadow-2xl backdrop-blur-xl"
+                >
+                    <!-- Top Bar -->
+                    <div
+                        class="mb-4 flex items-center border-b border-[#c7c4d7] pb-3"
+                    >
+                        <div class="flex gap-2">
+                            <span
+                                class="h-3 w-3 rounded-full bg-red-300"
+                            ></span>
+                            <span
+                                class="h-3 w-3 rounded-full bg-orange-300"
+                            ></span>
+                            <span
+                                class="h-3 w-3 rounded-full bg-green-300"
+                            ></span>
+                        </div>
+
+                        <div class="ml-auto flex items-center gap-2">
+                            <span class="font-mono text-xs text-gray-500">
+                                app/logs/auth.log
+                            </span>
+                            <!-- 
+                            <span
+                                class="material-symbols-outlined text-sm text-gray-500"
+                            >
+                                lock
+                            </span> -->
+                        </div>
+                    </div>
+
+                    <!-- Terminal -->
+                    <div class="space-y-3 font-mono text-sm">
+                        <div class="flex gap-4">
+                            <span class="text-gray-400">12:04:18</span>
+
+                            <span class="font-bold text-indigo-600"
+                                >[INFO]</span
+                            >
+
+                            <span class="text-gray-600">
+                                System initialized on port 8080...
+                            </span>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <span class="text-gray-400">12:04:22</span>
+
+                            <span class="font-bold text-blue-600">[DEBUG]</span>
+
+                            <span class="text-gray-600">
+                                Scanning for log agents in cluster alpha-01
+                            </span>
+                        </div>
+
+                        <div class="flex gap-4 opacity-60">
+                            <span class="text-gray-400">12:04:25</span>
+
+                            <span class="font-bold text-indigo-500"
+                                >[WAIT]</span
+                            >
+
+                            <span class="text-gray-600">
+                                Optimizing query engine for DevConsole...
+                            </span>
+                        </div>
+
+                        <div class="flex animate-pulse gap-4">
+                            <span class="text-gray-400">12:04:26</span>
+
+                            <span class="font-bold text-indigo-600">[_]</span>
+
+                            <span
+                                class="border-r-2 border-indigo-600 pr-2"
+                            ></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer
+            class="mt-20 flex w-full max-w-7xl flex-col items-center justify-between gap-6 border-t border-[#c7c4d7] pt-8 md:flex-row"
+        >
+            <!-- Links -->
+            <div class="flex items-center gap-6">
+                <a
+                    href="https://www.linkedin.com/in/verinakhella/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-mono text-sm text-gray-500 transition hover:text-indigo-600"
+                >
+                    LinkedIn
+                </a>
+
+                <a
+                    href="https://github.com/verinak"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-mono text-sm text-gray-500 transition hover:text-indigo-600"
+                >
+                    GitHub
+                </a>
+            </div>
+
+            <!-- Copyright -->
+            <div class="font-mono text-sm text-gray-500">
+                &copy; 2026 Verina Khella
+            </div>
+        </footer>
+    </main>
+</div>
