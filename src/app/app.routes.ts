@@ -7,6 +7,7 @@ import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-l
 import { DashboardHomeComponent } from './pages/dashboard-home/dashboard-home.component';
 import { DashboardAppsComponent } from './pages/dashboard-apps/dashboard-apps.component';
 import { ApplicationDetailsComponent } from './pages/application-details/application-details.component';
+import { authGuard } from './guards/auth/auth.guard';
 
 export const routes: Routes = [
     {
@@ -33,6 +34,7 @@ export const routes: Routes = [
     {
         path: 'dashboard',
         component: DashboardLayoutComponent,
+        canActivateChild: [authGuard],
         children: [
             {
                 path: '',
