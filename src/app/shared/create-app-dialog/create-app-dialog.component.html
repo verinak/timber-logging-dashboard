@@ -5,10 +5,12 @@
     class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-on-surface/40 backdrop-blur-md p-0 sm:p-4"
     id="create-app-modal"
     role="dialog"
+    (click)="closeModal()"
 >
     <div
         class="bg-surface-container-lowest w-full sm:max-w-lg sm:h-auto border-t sm:border border-outline-variant rounded-t-3xl sm:rounded-xl shadow-2xl flex flex-col overflow-hidden"
         id="modal-content"
+        (click)="$event.stopPropagation()"
     >
         <div
             class="px-unit-6 sm:px-unit-8 py-unit-4 sm:py-unit-6 border-b border-outline-variant flex items-center justify-between"

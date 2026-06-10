@@ -17,3 +17,7 @@
 html {
     scrollbar-gutter: stable;
 }
+
+body.modal-open {
+    overflow: hidden;
+}
