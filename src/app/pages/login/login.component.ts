@@ -1,8 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+    FormBuilder,
+    FormGroup,
+    ReactiveFormsModule,
+    Validators,
+} from '@angular/forms';
 import { switchMap } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-login',
@@ -14,6 +20,29 @@ export class LoginComponent {
     private authService = inject(AuthService);
     private router = inject(Router);
     private fb = inject(FormBuilder);
+    // private toastr = inject(ToastrService);
+
+    loginForm!: FormGroup;
+    // exisintgEmail = '';
+    error = '';
+
+    constructor() {
+        const exisintgEmail =
+            this.router.getCurrentNavigation()?.extras.state?.['email'] || '';
+
+        this.loginForm = this.fb.group({
+            email: [
+                exisintgEmail,
+                [
+                    Validators.required,
+                    Validators.pattern(
+                        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    ),
+                ],
+            ],
+            password: ['', [Validators.required, Validators.minLength(6)]],
+        });
+    }
 
     login(email: string, password: string) {
         this.authService.loginAndLoadUser(email, password).subscribe({
@@ -21,23 +50,15 @@ export class LoginComponent {
                 this.router.navigate(['/dashboard']);
             },
             error: (err) => {
-                console.error('login failed', err);
+                if (err.status == 401) {
+                    // this.toastr.error('Incorrect username or password');
+                    this.error = 'Incorrect username or password';
+                } else {
+                    console.error('login failed', err);
+                }
             },
         });
     }
-
-    loginForm = this.fb.group({
-        email: [
-            '',
-            [
-                Validators.required,
-                Validators.pattern(
-                    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                ),
-            ],
-        ],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-    });
 
     onSubmit() {
         if (this.loginForm.invalid) {

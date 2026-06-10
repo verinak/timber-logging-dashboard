@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CreateAppDialogComponent } from './shared/create-app-dialog/create-app-dialog.component';
 import { ShowModalService } from './services/show-modal/show-modal.service';
@@ -11,7 +11,6 @@ import { ShowModalService } from './services/show-modal/show-modal.service';
 })
 export class AppComponent {
     title = 'timber-logging-dashboard';
-
     constructor(private showModalService: ShowModalService) {}
 
     get isModalOpen(): boolean {

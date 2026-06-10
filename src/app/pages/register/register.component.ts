@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-register',
@@ -13,6 +14,7 @@ export class RegisterComponent {
     private authService = inject(AuthService);
     private router = inject(Router);
     private fb = inject(FormBuilder);
+    private toastr = inject(ToastrService);
 
     signup(email: string, password: string, username: string) {
         this.authService
@@ -22,7 +24,16 @@ export class RegisterComponent {
                     this.router.navigate(['/dashboard']);
                 },
                 error: (err) => {
-                    console.error('login failed', err);
+                    if (err.status == 409) {
+                        this.toastr.error(
+                            'Email already registered. Please log into your account.',
+                        );
+                        this.router.navigate(['/login'], {
+                            state: { email }, // send email to login page
+                        });
+                    } else {
+                        console.error('signup failed', err);
+                    }
                 },
             });
     }
