@@ -4,6 +4,7 @@ import { Observable, switchMap, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { AuthResponse } from '../../interfaces/auth-response.interface';
 import { ResponseUser } from '../../interfaces/user.interface';
+import { ApiResponse } from '../../interfaces/api-response.interface';
 
 @Injectable({
     providedIn: 'root',
@@ -15,7 +16,7 @@ export class AuthService {
     user = signal<ResponseUser | null>(null);
 
     loadUser() {
-        return this.me().pipe(tap((user) => this.user.set(user)));
+        return this.me().pipe(tap((res) => this.user.set(res.data)));
     }
 
     login(email: string, password: string): Observable<AuthResponse> {
@@ -59,7 +60,9 @@ export class AuthService {
             );
     }
 
-    me(): Observable<ResponseUser> {
-        return this.http.get<ResponseUser>(`${this.BASE_URL}/users/me`);
+    me(): Observable<ApiResponse<ResponseUser>> {
+        return this.http.get<ApiResponse<ResponseUser>>(
+            `${this.BASE_URL}/users/me`,
+        );
     }
 }
