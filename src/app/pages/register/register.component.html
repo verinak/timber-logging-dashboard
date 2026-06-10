@@ -1,6 +1,10 @@
 <div>
     <!-- Auth form -->
-    <form class="space-y-unit-6" onsubmit="event.preventDefault()">
+    <form
+        class="space-y-unit-6"
+        [formGroup]="signupForm"
+        (ngSubmit)="onSubmit()"
+    >
         <!-- Full Name Field -->
         <div class="space-y-unit-2">
             <label
@@ -11,13 +15,35 @@
             <div class="relative group">
                 <input
                     class="w-full bg-surface-container-lowest border border-outline-variant px-unit-3 py-unit-2 font-mono-md text-mono-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-outline-variant/60"
+                    autocomplete="name"
                     id="full_name"
-                    placeholder="Your Name"
-                    required=""
+                    name="full_name"
                     type="text"
+                    placeholder="Your Name"
+                    formControlName="fullName"
                 />
             </div>
+
+            @if (fullName?.touched && fullName?.invalid) {
+                <div class="mt-1 space-y-1 text-sm">
+                    @if (fullName?.errors?.["required"]) {
+                        <small
+                            class="block text-red-600 bg-red-50 border border-red-200 px-3 py-1 rounded-md"
+                        >
+                            Name is required
+                        </small>
+                    }
+                    @if (fullName?.errors?.["pattern"]) {
+                        <small
+                            class="block text-red-600 bg-red-50 border border-red-200 px-3 py-1 rounded-md"
+                        >
+                            Symbols and numbers are not allowed
+                        </small>
+                    }
+                </div>
+            }
         </div>
+
         <!-- Email Field -->
         <div class="space-y-unit-2">
             <label
@@ -28,13 +54,35 @@
             <div class="relative group">
                 <input
                     class="w-full bg-surface-container-lowest border border-outline-variant px-unit-3 py-unit-2 font-mono-md text-mono-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-outline-variant/60"
+                    autocomplete="email"
                     id="email"
-                    placeholder="name@company.com"
-                    required=""
+                    name="email"
                     type="email"
+                    placeholder="name@company.com"
+                    formControlName="email"
                 />
             </div>
+
+            @if (email?.touched && email?.invalid) {
+                <div class="mt-1 space-y-1 text-sm">
+                    @if (email?.errors?.["required"]) {
+                        <small
+                            class="block text-red-600 bg-red-50 border border-red-200 px-3 py-1 rounded-md"
+                        >
+                            Email is required
+                        </small>
+                    }
+                    @if (email?.errors?.["pattern"]) {
+                        <small
+                            class="block text-red-600 bg-red-50 border border-red-200 px-3 py-1 rounded-md"
+                        >
+                            Invalid email format
+                        </small>
+                    }
+                </div>
+            }
         </div>
+
         <!-- Password Field -->
         <div class="space-y-unit-2">
             <label
@@ -46,9 +94,11 @@
                 <input
                     class="w-full bg-surface-container-lowest border border-outline-variant px-unit-3 py-unit-2 font-mono-md text-mono-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-outline-variant/60"
                     id="password"
-                    placeholder="••••••••"
-                    required=""
+                    name="password"
                     type="password"
+                    autocomplete="current-password"
+                    placeholder="••••••••"
+                    formControlName="password"
                 />
             </div>
             <!-- <div class="flex items-start space-x-unit-2 mt-unit-1">
@@ -60,7 +110,26 @@
                     Min. 12 characters, including 1 symbol and 1 number.
                 </p>
             </div> -->
+            @if (password?.touched && password?.invalid) {
+                <div class="mt-1 space-y-1 text-sm">
+                    @if (password?.errors?.["required"]) {
+                        <small
+                            class="block text-red-600 bg-red-50 border border-red-200 px-3 py-1 rounded-md"
+                        >
+                            Password is required
+                        </small>
+                    }
+                    @if (password?.errors?.["minlength"]) {
+                        <small
+                            class="block text-red-600 bg-red-50 border border-red-200 px-3 py-1 rounded-md"
+                        >
+                            Password must be at least 6 characters
+                        </small>
+                    }
+                </div>
+            }
         </div>
+
         <!-- Action Button -->
         <button
             class="w-full bg-primary text-on-primary font-body-md text-body-md font-bold py-unit-3 flex items-center justify-center space-x-unit-2 hover:bg-primary-container active:scale-[0.98] transition-all focus:ring-2 focus:ring-primary/40 outline-none"
@@ -72,6 +141,7 @@
             >
         </button>
     </form>
+
     <!-- Card Footer -->
     <div
         class="mt-unit-8 pt-unit-6 border-t border-outline-variant text-center"

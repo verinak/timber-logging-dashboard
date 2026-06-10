@@ -1,6 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { AuthResponse } from '../../interfaces/auth-response.interface';
 import { ResponseUser } from '../../interfaces/user.interface';
@@ -25,6 +25,12 @@ export class AuthService {
         });
     }
 
+    loginAndLoadUser(email: string, password: string) {
+        return this.login(email, password).pipe(
+            switchMap(() => this.loadUser()),
+        );
+    }
+
     signup(
         email: string,
         password: string,
@@ -37,8 +43,20 @@ export class AuthService {
         });
     }
 
+    signupAndLoadUser(email: string, password: string, username: string) {
+        return this.signup(email, password, username).pipe(
+            switchMap(() => this.loadUser()),
+        );
+    }
+
     logout(): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(`${this.BASE_URL}/auth/logout`, {});
+        return this.http
+            .post<AuthResponse>(`${this.BASE_URL}/auth/logout`, {})
+            .pipe(
+                tap(() => {
+                    this.user.set(null);
+                }),
+            );
     }
 
     me(): Observable<ResponseUser> {
