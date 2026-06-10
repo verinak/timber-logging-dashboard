@@ -1,0 +1,8 @@
+/* Mobile Sidebar Overlay */
+#mobile-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+#sidebar.active {
+    transform: translateX(0);
+}

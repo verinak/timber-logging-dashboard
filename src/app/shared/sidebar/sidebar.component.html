@@ -1,0 +1,51 @@
+<aside
+    class="fixed left-0 top-0 h-screen w-16 lg:w-64 bg-surface-container border-r border-outline-variant flex flex-col py-unit-4 px-unit-2"
+>
+    <!-- App Branding -->
+    <div class="mb-6 pb-4 border-b border-outline-variant">
+        <a
+            routerLink="/"
+            class="flex items-center gap-3 px-3 py-2 text-on-primary-fixed-variant"
+        >
+            <app-icon class="shrink-0 size-6"></app-icon>
+            <span
+                class="hidden lg:inline font-display text-display tracking-wide uppercase text-xl"
+            >
+                Timber
+            </span>
+        </a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1 flex flex-col gap-1">
+        <a
+            routerLink="/dashboard"
+            class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant"
+            routerLinkActive="text-primary bg-primary/10 font-medium"
+            [routerLinkActiveOptions]="{ exact: true }"
+        >
+            <span class="material-symbols-outlined shrink-0">dashboard</span>
+            <span class="hidden lg:inline">Dashboard</span>
+        </a>
+
+        <a
+            routerLink="/dashboard/all-apps"
+            class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant"
+            routerLinkActive="text-primary bg-primary/10 font-medium"
+            [routerLinkActiveOptions]="{ exact: true }"
+        >
+            <span class="material-symbols-outlined shrink-0">apps</span>
+            <span class="hidden lg:inline">Applications</span>
+        </a>
+    </nav>
+
+    <!-- Logout -->
+    <div class="pt-4 border-t border-outline-variant">
+        <button
+            class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant"
+        >
+            <span class="material-symbols-outlined shrink-0">logout</span>
+            <span class="hidden lg:inline">Logout</span>
+        </button>
+    </div>
+</aside>
