@@ -77,9 +77,20 @@
 
     <!-- App Grid Section -->
     <section class="mt-unit-4">
-        <h2 class="font-headline-sm text-headline-sm text-on-surface mb-unit-4">
-            Recent Applications
-        </h2>
-        <app-app-grid />
+        <div class="flex flex-wrap items-center justify-between mb-unit-4">
+            <h2
+                class="font-headline-sm text-headline-sm text-on-surface w-full sm:w-auto"
+            >
+                Recent Applications
+            </h2>
+
+            <a
+                class="sm:font-body-md sm:text-body-md font-body-sm text-body-sm text-primary hover:underline transition-colors w-full sm:w-auto text-end"
+                routerLink="/dashboard/all-apps"
+            >
+                View all
+            </a>
+        </div>
+        <app-app-grid [limit]="5" />
     </section>
 </div>

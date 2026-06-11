@@ -3,10 +3,11 @@ import { AppGridComponent } from '../../shared/app-grid/app-grid.component';
 import { ShowModalService } from '../../services/show-modal/show-modal.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-dashboard-home',
-    imports: [AppGridComponent],
+    imports: [AppGridComponent, RouterLink],
     templateUrl: './dashboard-home.component.html',
     styleUrl: './dashboard-home.component.css',
 })

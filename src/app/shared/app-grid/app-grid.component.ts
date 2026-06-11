@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, Input, signal } from '@angular/core';
 import { AppCardComponent } from './app-card/app-card.component';
 import { RouterLink } from '@angular/router';
 import { ShowModalService } from '../../services/show-modal/show-modal.service';
@@ -14,13 +14,15 @@ import { ResponseApplication } from '../../interfaces/application.interface';
     styleUrl: './app-grid.component.css',
 })
 export class AppGridComponent {
+    @Input() limit: number | null = null;
     private appsService = inject(AppsService);
     apps = signal<ResponseApplication[]>([]);
 
     constructor(private showModalService: ShowModalService) {
         this.appsService.getApplications().subscribe({
             next: (apps) => {
-                this.apps.set(apps);
+                apps.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+                this.apps.set(this.limit ? apps.slice(0, this.limit) : apps);
                 // console.log(apps);
             },
             error: (err) => {
