@@ -1,7 +1,6 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { ResponseApplication } from '../../../interfaces/application.interface';
 import { DatePipe } from '@angular/common';
-import { AppsService } from '../../../services/apps/apps.service';
 import { RouterLink } from '@angular/router';
 
 @Component({

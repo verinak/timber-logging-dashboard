@@ -11,7 +11,9 @@ import { ShowModalService } from './services/show-modal/show-modal.service';
 })
 export class AppComponent {
     title = 'timber-logging-dashboard';
-    constructor(private showModalService: ShowModalService) {}
+
+    private showModalService = inject(ShowModalService);
+    constructor() {}
 
     get isModalOpen(): boolean {
         return this.showModalService.isOpen();

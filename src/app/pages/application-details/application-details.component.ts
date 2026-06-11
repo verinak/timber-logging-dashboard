@@ -9,11 +9,7 @@ import {
 import { ResponseApplication } from '../../interfaces/application.interface';
 import { AppsService } from '../../services/apps/apps.service';
 import { DatePipe, NgClass } from '@angular/common';
-import {
-    ApplicationLog,
-    LogLevel,
-    LogSortBy,
-} from '../../interfaces/log.interface';
+import { LogLevel, LogSortBy } from '../../interfaces/log.interface';
 import {
     debounceTime,
     distinctUntilChanged,
@@ -185,7 +181,7 @@ export class ApplicationDetailsComponent implements OnInit {
 
     deleteApp() {
         const deletedApp = this.app(); // save app in case delete fails
-        console.log(this.app());
+        // console.log(this.app());
 
         // update signal (optimistic update)
         this.appsService.removeApp(this.appId);

@@ -60,12 +60,9 @@ export class CreateAppDialogComponent implements OnInit, OnDestroy {
     }
 
     createApplication() {
-        console.log('in submit');
         if (this.appName.invalid) {
             return;
         }
-
-        // console.log(this.appName.value);
 
         const name = this.appName.value;
 

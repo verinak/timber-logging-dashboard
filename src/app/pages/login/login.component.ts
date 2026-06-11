@@ -7,8 +7,6 @@ import {
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
-import { switchMap } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-login',
@@ -20,10 +18,8 @@ export class LoginComponent {
     private authService = inject(AuthService);
     private router = inject(Router);
     private fb = inject(FormBuilder);
-    // private toastr = inject(ToastrService);
 
     loginForm!: FormGroup;
-    // exisintgEmail = '';
     error = '';
 
     constructor() {
@@ -51,7 +47,6 @@ export class LoginComponent {
             },
             error: (err) => {
                 if (err.status == 401) {
-                    // this.toastr.error('Incorrect username or password');
                     this.error = 'Incorrect username or password';
                 } else {
                     console.error('login failed', err);

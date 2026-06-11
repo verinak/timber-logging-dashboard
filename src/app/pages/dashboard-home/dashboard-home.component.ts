@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AppGridComponent } from '../../shared/app-grid/app-grid.component';
 import { ShowModalService } from '../../services/show-modal/show-modal.service';
 import { AuthService } from '../../services/auth/auth.service';
@@ -38,7 +38,6 @@ export class DashboardHomeComponent {
         try {
             await navigator.clipboard.writeText(this.userData.apiKey);
             this.toastr.info('Coppied to clipboard');
-            // Optional: show toast/snackbar
         } catch (err) {
             console.error('Failed to copy API key', err);
         }
