@@ -1,270 +1,255 @@
-<!-- Workspace Header -->
-<div
-    class="mt-unit-6 md:mt-0 mb-unit-6 flex flex-col-reverse md:flex-col md:items-end gap-unit-2"
->
-    <button
-        class="flex items-center justify-center gap-unit-2 px-unit-3 py-1.5 md:py-2 md:px-unit-4 text-sm md:text-base border border-error text-error hover:bg-error/5 transition-colors rounded-sm font-body-sm w-full md:w-auto"
-    >
-        <span class="material-symbols-outlined">delete</span>
-        Delete Application
-    </button>
+@if (!app()) {
+    <div class="mt-unit-6 text-center">
+        {{ error }}
+    </div>
+} @else {
+    <!-- Workspace Header -->
     <div
-        class="w-full flex flex-col md:flex-row md:items-baseline gap-unit-2 md:gap-unit-3 mt-unit-4 md:mt-0"
+        class="mt-unit-6 md:mt-0 mb-unit-6 flex flex-col-reverse md:flex-col md:items-end gap-unit-2"
     >
-        <h1
-            class="font-display text-display text-3xl text-on-surface flex-1 mb-2"
-        >
-            {{ appId }}
-        </h1>
-
-        <div class="flex flex-wrap gap-unit-3 items-center">
-            <div class="flex items-center gap-1 text-on-surface-variant/60">
-                <span class="material-symbols-outlined text-sm"
-                    >calendar_today</span
-                >
-                <span class="font-label-caps text-label-caps"
-                    >Created: Oct 12, 2023</span
-                >
-            </div>
-            <div class="flex items-center gap-1 text-on-surface-variant/60">
-                <span class="material-symbols-outlined text-sm">history</span>
-                <span class="font-label-caps text-label-caps"
-                    >Last Updated: 2 hours ago</span
-                >
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Controls Toolbar -->
-<div
-    class="bg-surface-container border border-outline-variant p-unit-3 flex flex-col xl:flex-row gap-unit-4 items-center justify-between mb-unit-4"
->
-    <div class="flex-grow w-full xl:max-w-md relative">
-        <span
-            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant"
-            >search</span
-        >
-        <input
-            class="w-full bg-background border border-outline-variant pl-10 pr-4 py-2 font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 rounded-sm"
-            placeholder="Search log messages..."
-            type="text"
-        />
-    </div>
-    <div
-        class="flex flex-col sm:flex-row items-center justify-between xl:justify-start gap-unit-4 w-full xl:w-auto"
-    >
-        <!-- Level Filter -->
-        <div
-            class="flex w-full sm:w-auto border border-outline-variant rounded-sm overflow-hidden"
-        >
-            <button
-                class="flex-1 sm:flex-none px-unit-3 py-1.5 font-label-caps text-[10px] md:text-label-caps bg-primary text-on-primary"
-            >
-                ALL
-            </button>
-            <button
-                class="flex-1 sm:flex-none px-unit-3 py-1.5 font-label-caps text-[10px] md:text-label-caps border-l border-outline-variant hover:bg-surface-variant transition-colors"
-            >
-                INFO
-            </button>
-            <button
-                class="flex-1 sm:flex-none px-unit-3 py-1.5 font-label-caps text-[10px] md:text-label-caps border-l border-outline-variant hover:bg-surface-variant transition-colors"
-            >
-                WARN
-            </button>
-            <button
-                class="flex-1 sm:flex-none px-unit-3 py-1.5 font-label-caps text-[10px] md:text-label-caps border-l border-outline-variant hover:bg-surface-variant transition-colors"
-            >
-                ERROR
-            </button>
-        </div>
-        <!-- Sort Toggle -->
-        <div
-            class="w-full sm:w-auto flex items-center justify-center gap-unit-2 bg-surface-container-highest border border-outline-variant px-unit-2 py-1.5 rounded-sm cursor-pointer hover:bg-surface-variant transition-colors"
-        >
-            <span class="material-symbols-outlined text-[18px]">sort</span>
-            <span class="font-body-sm text-body-sm">Sort: Recent</span>
-        </div>
-    </div>
-</div>
-
-<!-- Log Table Workspace -->
-<div
-    class="bg-surface-container border border-outline-variant overflow-x-auto custom-scrollbar"
->
-    <table class="w-full text-left border-collapse min-w-[800px] md:min-w-0">
-        <thead>
-            <tr
-                class="bg-surface-container-highest border-b border-outline-variant"
-            >
-                <th
-                    class="px-unit-4 py-unit-3 font-label-caps text-label-caps text-outline"
-                >
-                    SEVERITY
-                </th>
-                <th
-                    class="px-unit-4 py-unit-3 font-label-caps text-label-caps text-outline w-1/2"
-                >
-                    LOG MESSAGE
-                </th>
-                <th
-                    class="px-unit-4 py-unit-3 font-label-caps text-label-caps text-outline text-right"
-                >
-                    COUNT
-                </th>
-                <th
-                    class="px-unit-4 py-unit-3 font-label-caps text-label-caps text-outline"
-                >
-                    FIRST SEEN
-                </th>
-                <th
-                    class="px-unit-4 py-unit-3 font-label-caps text-label-caps text-outline"
-                >
-                    LAST SEEN
-                </th>
-            </tr>
-        </thead>
-        <tbody class="divide-y divide-outline-variant/30">
-            <tr class="hover:bg-surface-container-high transition-colors group">
-                <td class="px-unit-4 py-unit-3">
-                    <span
-                        class="px-2 py-0.5 rounded-sm bg-error-container/20 text-error font-label-caps text-[10px] border border-error/30"
-                        >ERROR</span
-                    >
-                </td>
-                <td class="px-unit-4 py-unit-3">
-                    <p
-                        class="font-mono-md text-mono-md truncate text-on-surface"
-                    >
-                        Connection timeout while connecting to provider: Stripe
-                        API...
-                    </p>
-                </td>
-                <td
-                    class="px-unit-4 py-unit-3 text-right font-mono-sm text-mono-sm text-outline"
-                >
-                    428
-                </td>
-                <td
-                    class="px-unit-4 py-unit-3 font-mono-sm text-mono-sm text-outline-variant"
-                >
-                    2023-10-24 14:02:11
-                </td>
-                <td
-                    class="px-unit-4 py-unit-3 font-mono-sm text-mono-sm text-on-surface"
-                >
-                    2023-10-27 09:15:22
-                </td>
-            </tr>
-            <tr class="hover:bg-surface-container-high transition-colors group">
-                <td class="px-unit-4 py-unit-3">
-                    <span
-                        class="px-2 py-0.5 rounded-sm bg-tertiary/10 text-tertiary font-label-caps text-[10px] border border-tertiary/30"
-                        >WARN</span
-                    >
-                </td>
-                <td class="px-unit-4 py-unit-3">
-                    <p
-                        class="font-mono-md text-mono-md truncate text-on-surface"
-                    >
-                        Invalid bearer token format provided in authorization
-                        header
-                    </p>
-                </td>
-                <td
-                    class="px-unit-4 py-unit-3 text-right font-mono-sm text-mono-sm text-outline"
-                >
-                    1,024
-                </td>
-                <td
-                    class="px-unit-4 py-unit-3 font-mono-sm text-mono-sm text-outline-variant"
-                >
-                    2023-10-20 08:30:00
-                </td>
-                <td
-                    class="px-unit-4 py-unit-3 font-mono-sm text-mono-sm text-on-surface"
-                >
-                    2023-10-27 09:12:05
-                </td>
-            </tr>
-            <tr class="hover:bg-surface-container-high transition-colors group">
-                <td class="px-unit-4 py-unit-3">
-                    <span
-                        class="px-2 py-0.5 rounded-sm bg-secondary-container/20 text-secondary font-label-caps text-[10px] border border-secondary/30"
-                        >INFO</span
-                    >
-                </td>
-                <td class="px-unit-4 py-unit-3">
-                    <p
-                        class="font-mono-md text-mono-md truncate text-on-surface"
-                    >
-                        Successfully processed transaction ID: txn_9823kjsd92
-                    </p>
-                </td>
-                <td
-                    class="px-unit-4 py-unit-3 text-right font-mono-sm text-mono-sm text-outline"
-                >
-                    15.4k
-                </td>
-                <td
-                    class="px-unit-4 py-unit-3 font-mono-sm text-mono-sm text-outline-variant"
-                >
-                    2023-10-01 00:00:00
-                </td>
-                <td
-                    class="px-unit-4 py-unit-3 font-mono-sm text-mono-sm text-on-surface"
-                >
-                    2023-10-27 09:14:11
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<!-- Pagination Bar -->
-<div
-    class="flex flex-col sm:flex-row items-center justify-between mt-unit-4 py-unit-2 gap-4"
->
-    <span class="font-body-sm text-body-sm text-outline-variant"
-        >Showing 1-10 of 1,240 logs</span
-    >
-    <div class="flex items-center gap-unit-1">
         <button
-            class="p-1 border border-outline-variant rounded-sm hover:bg-surface-variant transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            class="flex items-center justify-center gap-unit-2 px-unit-3 py-1.5 md:py-2 md:px-unit-4 text-sm md:text-base border border-error text-error hover:bg-error/5 transition-colors rounded-sm font-body-sm w-full md:w-auto"
+            type="button"
+            (click)="deleteApp()"
         >
-            <span class="material-symbols-outlined">chevron_left</span>
+            <span class="material-symbols-outlined">delete</span>
+            Delete Application
         </button>
-        <div class="flex gap-unit-1 px-unit-2">
-            <button
-                class="w-8 h-8 flex items-center justify-center font-mono-sm text-mono-sm bg-primary text-on-primary rounded-sm"
+        <div
+            class="w-full flex flex-col md:flex-row md:items-baseline gap-unit-2 md:gap-unit-3 mt-unit-4 md:mt-0"
+        >
+            <h1
+                class="font-display text-display text-3xl text-on-surface flex-1 mb-2"
             >
-                1
-            </button>
-            <button
-                class="w-8 h-8 flex items-center justify-center font-mono-sm text-mono-sm hover:bg-surface-container-high rounded-sm"
-            >
-                2
-            </button>
-            <button
-                class="hidden sm:flex w-8 h-8 items-center justify-center font-mono-sm text-mono-sm hover:bg-surface-container-high rounded-sm"
-            >
-                3
-            </button>
+                {{ app()!.name }}
+            </h1>
+
+            <div class="flex flex-wrap gap-unit-3 items-center">
+                <div class="flex items-center gap-1 text-on-surface-variant/60">
+                    <span class="material-symbols-outlined text-sm"
+                        >calendar_today</span
+                    >
+                    <span class="font-label-caps text-label-caps"
+                        >Created:
+                        {{ app()!.createdAt | date: "MMM d, y, h:mm a" }}</span
+                    >
+                </div>
+                <div class="flex items-center gap-1 text-on-surface-variant/60">
+                    <span class="material-symbols-outlined text-sm"
+                        >history</span
+                    >
+                    <span class="font-label-caps text-label-caps"
+                        >Last Updated:
+                        {{ app()!.updatedAt | date: "MMM d, y, h:mm a" }}</span
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls Toolbar -->
+    <div
+        class="bg-surface-container border border-outline-variant p-unit-3 flex flex-col xl:flex-row gap-unit-4 items-center justify-between mb-unit-4"
+    >
+        <div class="flex-grow w-full xl:max-w-md relative">
             <span
-                class="w-8 h-8 flex items-center justify-center font-mono-sm text-mono-sm"
-                >...</span
+                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant"
+                >search</span
             >
+            <input
+                class="w-full bg-background border border-outline-variant pl-10 pr-4 py-2 font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 rounded-sm"
+                placeholder="Search log messages..."
+                type="text"
+                [formControl]="searchControl"
+            />
+        </div>
+        <div
+            class="flex flex-col sm:flex-row items-center justify-between xl:justify-start gap-unit-4 w-full xl:w-auto"
+        >
+            <!-- Level Filter -->
+            <div
+                class="flex w-full sm:w-auto border border-outline-variant rounded-sm overflow-hidden"
+            >
+                <button
+                    (click)="setLevel('all')"
+                    class="flex-1 sm:flex-none px-unit-3 py-1.5 font-label-caps text-[10px] md:text-label-caps"
+                    [class.bg-primary]="level() === 'all'"
+                    [class.text-on-primary]="level() === 'all'"
+                    [class.hover\:bg-surface-variant]="level() !== 'all'"
+                >
+                    ALL
+                </button>
+
+                <button
+                    (click)="setLevel('INFO')"
+                    class="flex-1 sm:flex-none px-unit-3 py-1.5 font-label-caps text-[10px] md:text-label-caps border-l border-outline-variant"
+                    [class.bg-primary]="level() === 'INFO'"
+                    [class.text-on-primary]="level() === 'INFO'"
+                    [class.hover\:bg-surface-variant]="level() !== 'INFO'"
+                >
+                    INFO
+                </button>
+
+                <button
+                    (click)="setLevel('WARN')"
+                    class="flex-1 sm:flex-none px-unit-3 py-1.5 font-label-caps text-[10px] md:text-label-caps border-l border-outline-variant"
+                    [class.bg-primary]="level() === 'WARN'"
+                    [class.text-on-primary]="level() === 'WARN'"
+                    [class.hover\:bg-surface-variant]="level() !== 'WARN'"
+                >
+                    WARN
+                </button>
+
+                <button
+                    (click)="setLevel('ERROR')"
+                    class="flex-1 sm:flex-none px-unit-3 py-1.5 font-label-caps text-[10px] md:text-label-caps border-l border-outline-variant"
+                    [class.bg-primary]="level() === 'ERROR'"
+                    [class.text-on-primary]="level() === 'ERROR'"
+                    [class.hover\:bg-surface-variant]="level() !== 'ERROR'"
+                >
+                    ERROR
+                </button>
+            </div>
+
+            <!-- Sort Toggle -->
+            <div
+                (click)="toggleSort()"
+                class="w-full sm:w-auto flex items-center justify-center gap-unit-2 bg-surface-container-highest border border-outline-variant px-unit-2 py-1.5 rounded-sm cursor-pointer hover:bg-surface-variant transition-colors"
+            >
+                <span class="material-symbols-outlined text-[18px]">sort</span>
+
+                <span class="font-body-sm text-body-sm">
+                    Sort: {{ sortBy() === "recent" ? "Recent" : "Count" }}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Log Table Workspace -->
+    <div
+        class="bg-surface-container border border-outline-variant overflow-x-auto custom-scrollbar"
+    >
+        <table
+            class="w-full text-left border-collapse min-w-[800px] md:min-w-0"
+        >
+            <thead>
+                <tr
+                    class="bg-surface-container-highest border-b border-outline-variant"
+                >
+                    <th
+                        class="px-unit-4 py-unit-3 font-label-caps text-label-caps text-outline"
+                    >
+                        SEVERITY
+                    </th>
+                    <th
+                        class="px-unit-4 py-unit-3 font-label-caps text-label-caps text-outline w-1/2"
+                    >
+                        LOG MESSAGE
+                    </th>
+                    <th
+                        class="px-unit-4 py-unit-3 font-label-caps text-label-caps text-outline text-right"
+                    >
+                        COUNT
+                    </th>
+                    <th
+                        class="px-unit-4 py-unit-3 font-label-caps text-label-caps text-outline"
+                    >
+                        FIRST SEEN
+                    </th>
+                    <th
+                        class="px-unit-4 py-unit-3 font-label-caps text-label-caps text-outline"
+                    >
+                        LAST SEEN
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody class="divide-y divide-outline-variant/30">
+                @for (log of this.logsResponse().logs; track log.message) {
+                    <tr
+                        class="hover:bg-surface-container-high transition-colors group"
+                    >
+                        <!-- SEVERITY -->
+                        <td class="px-unit-4 py-unit-2">
+                            <span
+                                class="px-2 py-0.5 rounded-sm font-label-caps text-[10px] border"
+                                [ngClass]="severityStyles[log.level].badge"
+                            >
+                                {{ log.level }}
+                            </span>
+                        </td>
+
+                        <!-- MESSAGE -->
+                        <td class="px-unit-4 py-unit-2">
+                            <p
+                                class="font-mono-md text-mono-md truncate text-on-surface"
+                            >
+                                {{ log.message }}
+                            </p>
+                        </td>
+
+                        <!-- COUNT -->
+                        <td
+                            class="px-unit-4 py-unit-2 text-right font-mono-sm text-[14px] text-outline"
+                        >
+                            {{ log.count }}
+                        </td>
+
+                        <!-- FIRST SEEN -->
+                        <td
+                            class="px-unit-4 py-unit-2 font-mono-sm text-mono-sm text-outline"
+                        >
+                            {{ log.createdAt | date: "yyyy-MM-dd HH:mm:ss" }}
+                        </td>
+
+                        <!-- LAST SEEN -->
+                        <td
+                            class="px-unit-4 py-unit-2 font-mono-sm text-mono-sm text-on-surface"
+                        >
+                            {{ log.updatedAt | date: "yyyy-MM-dd HH:mm:ss" }}
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination Bar -->
+    <div
+        class="flex flex-col sm:flex-row items-end justify-between mt-unit-4 py-unit-2 gap-4 flex-1"
+    >
+        <span class="font-body-sm text-body-sm text-outline-variant">
+            Showing {{ startItem() }}–{{ endItem() }} of
+            {{ this.logsResponse().totalCount }} logs
+        </span>
+        <div class="flex items-center gap-unit-1">
             <button
-                class="w-8 h-8 flex items-center justify-center font-mono-sm text-mono-sm hover:bg-surface-container-high rounded-sm"
+                class="p-1 border border-outline-variant rounded-sm hover:bg-surface-variant transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                (click)="setPage(page() - 1)"
+                [disabled]="page() === 1"
             >
-                124
+                <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <div class="flex gap-unit-1 px-unit-2">
+                @for (p of visiblePages(); track p) {
+                    <button
+                        (click)="setPage(p)"
+                        class="w-8 h-8 flex items-center justify-center font-mono-sm text-mono-sm rounded-sm"
+                        [class.bg-primary]="p === page()"
+                        [class.text-on-primary]="p === page()"
+                        [class.hover:bg-surface-container-high]="p !== page()"
+                    >
+                        {{ p }}
+                    </button>
+                }
+            </div>
+            <button
+                class="p-1 border border-outline-variant rounded-sm hover:bg-surface-variant transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                (click)="setPage(page() + 1)"
+                [disabled]="page() === totalPages()"
+            >
+                <span class="material-symbols-outlined">chevron_right</span>
             </button>
         </div>
-        <button
-            class="p-1 border border-outline-variant rounded-sm hover:bg-surface-variant transition-colors"
-        >
-            <span class="material-symbols-outlined">chevron_right</span>
-        </button>
     </div>
-</div>
+}

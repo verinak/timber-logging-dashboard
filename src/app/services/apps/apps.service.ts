@@ -87,7 +87,7 @@ export class AppsService {
         let params = new HttpParams();
 
         if (query?.search) {
-            params = params.set('search', query.search);
+            params = params.set('q', query.search);
         }
 
         if (query?.level) {
