@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import {
     NameAvailability,
     ResponseApplication,
@@ -19,7 +19,30 @@ export class AppsService {
     private http = inject(HttpClient);
     private BASE_URL = environment.apiUrl;
 
+    apps = signal<ResponseApplication[]>([]);
+
     constructor() {}
+
+    loadApps() {
+        return this.getApplications().pipe(
+            tap((apps) => {
+                this.apps.set(apps);
+            }),
+        );
+    }
+
+    // signal updates
+    addApp(app: ResponseApplication) {
+        this.apps.update((apps) => [...apps, app]);
+    }
+    removeApp(name: string) {
+        this.apps.update((apps) => apps.filter((app) => app.name !== name));
+    }
+    updateApp(name: string, newApp: ResponseApplication) {
+        this.apps.update((apps) =>
+            apps.map((app) => (app.name === name ? newApp : app)),
+        );
+    }
 
     /**
      * GET /api/applications

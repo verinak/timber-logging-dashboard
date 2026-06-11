@@ -1,11 +1,4 @@
-import {
-    Component,
-    EventEmitter,
-    inject,
-    OnDestroy,
-    OnInit,
-    Output,
-} from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ShowModalService } from '../../services/show-modal/show-modal.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -74,13 +67,27 @@ export class CreateAppDialogComponent implements OnInit, OnDestroy {
 
         // console.log(this.appName.value);
 
-        this.appsService.createApplication(this.appName.value).subscribe({
+        const name = this.appName.value;
+
+        // optimistic update
+        this.appsService.addApp({
+            name,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+        });
+
+        this.appsService.createApplication(name).subscribe({
             next: (app) => {
+                // console.log(app);
+                // this.appsService.updateApp(name, app); // update with api response for date and time consistency
+                // i'm skipping the update thing here because using 'name' only for update can be problematic
+                // it's better to have a tempId in the optimistic app update, and then delete and add the response app
+                // bs ana el api 3andi m4 3mlah byraga3 el appId fa m4 3arfa a3mel keda
                 this.showModalService.close();
-                this.router.navigate(['/dashboard']); // i am tired ok don't judge
             },
             error: (err) => {
                 // handle error
+                this.appsService.removeApp(name); // revert signal update on error
                 console.error("couldn't create application", err);
             },
         });

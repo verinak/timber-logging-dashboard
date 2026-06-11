@@ -184,11 +184,18 @@ export class ApplicationDetailsComponent implements OnInit {
     }
 
     deleteApp() {
+        const deletedApp = this.app(); // save app in case delete fails
+        console.log(this.app());
+
+        // update signal (optimistic update)
+        this.appsService.removeApp(this.appId);
+
         this.appsService.deleteApplication(this.appId).subscribe({
             next: () => {
                 this.router.navigate(['/dashboard']);
             },
             error: (err) => {
+                if (deletedApp) this.appsService.addApp(deletedApp); // revert signal update
                 console.error("couldn't delete application", err);
             },
         });

@@ -1,11 +1,7 @@
-import { Component, inject, Input, signal } from '@angular/core';
+import { Component, computed, inject, Input, signal } from '@angular/core';
 import { AppCardComponent } from './app-card/app-card.component';
-import { RouterLink } from '@angular/router';
 import { ShowModalService } from '../../services/show-modal/show-modal.service';
 import { AppsService } from '../../services/apps/apps.service';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { catchError, of } from 'rxjs';
-import { ResponseApplication } from '../../interfaces/application.interface';
 
 @Component({
     selector: 'app-app-grid',
@@ -16,46 +12,37 @@ import { ResponseApplication } from '../../interfaces/application.interface';
 export class AppGridComponent {
     @Input() limit: number | null = null;
     private appsService = inject(AppsService);
-    apps = signal<ResponseApplication[]>([]);
 
-    constructor(private showModalService: ShowModalService) {
-        this.appsService.getApplications().subscribe({
-            next: (apps) => {
-                apps.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
-                this.apps.set(this.limit ? apps.slice(0, this.limit) : apps);
-                // console.log(apps);
-            },
-            error: (err) => {
-                console.error("couldn't get applications", err);
-            },
-        });
+    // apps = this.appsService.apps;
+    apps = computed(() => {
+        const apps = this.appsService
+            .apps()
+            .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+        return this.limit ? apps.slice(0, this.limit) : apps;
+    });
+
+    constructor(private showModalService: ShowModalService) {}
+
+    ngOnInit() {
+        if (this.apps().length === 0) {
+            this.appsService.loadApps().subscribe();
+        }
     }
 
     openModal() {
         this.showModalService.open();
     }
 
-    // deleteApp(appName: string) {
-    //     this.appsService.deleteApplication(appName).subscribe({
-    //         next: () => {
-
-    //         },
-    //         error: (err) => {
-    //             console.error("couldn't delete application", err);
-    //         },
-    //     });
-    // }
-
     handleDelete(appName: string) {
-        const previousApps = this.apps(); // save apps before update in case delete fails
+        const deletedApp = this.apps().find((app) => app.name === appName); // save app in case delete fails
 
         // update signal (optimistic update)
-        this.apps.update((apps) => apps.filter((app) => app.name !== appName));
+        this.appsService.removeApp(appName);
 
         // send delete request
         this.appsService.deleteApplication(appName).subscribe({
             error: (err) => {
-                this.apps.set(previousApps); // revert signal update
+                if (deletedApp) this.appsService.addApp(deletedApp); // revert signal update
                 console.error("couldn't delete application", err);
             },
         });
