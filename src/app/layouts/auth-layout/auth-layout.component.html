@@ -1,0 +1,50 @@
+<div
+    class="bg-background text-on-background min-h-screen flex flex-col items-center justify-center p-margin-mobile font-body-md overflow-x-hidden"
+>
+    <!-- Atmospheric Background Layers -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden opacity-20">
+        <div
+            class="absolute -top-[10%] -left-[10%] w-[60%] md:w-[40%] h-[40%] bg-primary-container blur-[80px] md:blur-[120px] rounded-full"
+        ></div>
+        <div
+            class="absolute -bottom-[10%] -right-[10%] w-[50%] md:w-[30%] h-[30%] bg-secondary-container blur-[70px] md:blur-[100px] rounded-full"
+        ></div>
+    </div>
+
+    <!-- main layout -->
+    <main class="relative z-10 w-full max-w-[420px] flex flex-col items-center">
+        <!-- Brand Header -->
+        <header
+            class="flex flex-col items-center mb-unit-8 space-y-unit-2 text-center"
+        >
+            <div
+                class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mb-unit-2 shadow-lg shadow-primary/20"
+            >
+                <app-icon class="text-on-primary size-8"></app-icon>
+            </div>
+            <a routerLink="/"
+                ><h1
+                    class="font-display text-display tracking-wide uppercase text-on-surface mb-1"
+                >
+                    Timber
+                </h1></a
+            >
+            <p
+                class="font-body-md text-body-md text-on-surface-variant max-w-[280px]"
+            >
+                All your logs in one place.
+            </p>
+        </header>
+
+        <!-- Auth Card -->
+        <div
+            class="w-full bg-surface-container border border-outline-variant p-unit-6 md:p-unit-8 shadow-2xl rounded-md relative overflow-hidden"
+        >
+            <!-- Subtle accent bar -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-primary"></div>
+
+            <!-- Card Content -->
+            <router-outlet></router-outlet>
+        </div>
+    </main>
+</div>

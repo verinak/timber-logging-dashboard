@@ -1,0 +1,96 @@
+<!-- Header Actions -->
+<header class="flex flex-col mb-unit-8 gap-unit-2">
+    <h1
+        class="font-display text-display text-on-surface text-2xl md:text-display"
+    >
+        Hello, {{ userData.username }}
+    </h1>
+    <p class="text-on-surface-variant font-body-md text-body-md mt-unit-1">
+        Manage your keys and registered application services.
+    </p>
+</header>
+
+<!-- Bento Grid Layout -->
+<div class="space-y-unit-4">
+    <!-- API Key Module -->
+    <section
+        class="bg-surface-container border border-outline-variant p-unit-4 md:p-unit-6 rounded-lg relative overflow-hidden group"
+    >
+        <div class="relative z-10">
+            <div
+                class="flex flex-col md:flex-row md:items-center gap-unit-2 mb-unit-4"
+            >
+                <div class="flex items-center gap-unit-2">
+                    <span
+                        class="material-symbols-outlined text-primary"
+                        data-icon="vpn_key"
+                        >vpn_key</span
+                    >
+                    <h2
+                        class="font-headline-sm text-headline-sm text-on-surface"
+                    >
+                        Primary API Key
+                    </h2>
+                </div>
+            </div>
+            <div
+                class="bg-surface-container-lowest border border-outline-variant rounded p-unit-3 md:p-unit-4 flex flex-col items-end sm:flex-row sm:items-center justify-between group/key"
+            >
+                <code
+                    class="font-mono-md text-mono-sm md:text-mono-md text-primary mr-2 flex-1 min-w-0 break-all"
+                    id="api-key"
+                >
+                    {{ maskedApiKey }}
+                </code>
+                <div
+                    class="flex items-center gap-unit-1 md:gap-unit-2 flex-shrink-0"
+                >
+                    <button
+                        class="p-unit-2 hover:bg-surface-variant rounded transition-colors text-on-surface-variant"
+                        type="button"
+                        (click)="showApiKey = !showApiKey"
+                    >
+                        <span
+                            class="material-symbols-outlined"
+                            data-icon="visibility"
+                            id="eye-icon"
+                        >
+                            {{ showApiKey ? "visibility_off" : "visibility" }}
+                        </span>
+                    </button>
+                    <button
+                        class="p-unit-2 hover:bg-surface-variant rounded transition-colors text-on-surface-variant"
+                        onclick="copyKey()"
+                        type="button"
+                        (click)="copyApiKey()"
+                    >
+                        <span
+                            class="material-symbols-outlined"
+                            data-icon="content_copy"
+                            >content_copy</span
+                        >
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Grid Section -->
+    <section class="mt-unit-4">
+        <div class="flex flex-wrap items-center justify-between mb-unit-4">
+            <h2
+                class="font-headline-sm text-headline-sm text-on-surface w-full sm:w-auto"
+            >
+                Recent Applications
+            </h2>
+
+            <a
+                class="sm:font-body-md sm:text-body-md font-body-sm text-body-sm text-primary hover:underline transition-colors w-full sm:w-auto text-end"
+                routerLink="/dashboard/all-apps"
+            >
+                View all
+            </a>
+        </div>
+        <app-app-grid [limit]="5" />
+    </section>
+</div>

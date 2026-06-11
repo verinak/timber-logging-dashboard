@@ -1,182 +1,177 @@
-<!-- landing-page.component.html -->
-<div
-    class="min-h-screen flex flex-col bg-[#fbf8fc] text-[#1b1b1e] overflow-x-hidden relative"
->
-    <!-- Background -->
-    <div class="absolute inset-0 bg-grid opacity-30 pointer-events-none"></div>
-
-    <div
-        class="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-[128px] pointer-events-none"
-    ></div>
-
-    <div
-        class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] pointer-events-none"
-    ></div>
-
-    <!-- Hero -->
-    <main
-        class="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pt-18 pb-8"
+<main class="min-h-screen pt-18 pb-12 hero-gradient overflow-hidden">
+    <!-- Hero Section -->
+    <section
+        class="max-w-7xl mx-auto px-4 text-center animate-in fade-in slide-in-from-bottom-4 duration-1000"
     >
-        <section class="w-full max-w-4xl text-center">
-            <!-- Badge -->
-            <div
-                class="mb-8 inline-flex items-center gap-2 rounded-full border border-[#c7c4d7] bg-white px-4 py-2"
+        <div
+            class="inline-flex items-center px-unit-3 py-unit-1 mb-unit-6 rounded-full border border-primary/20 bg-primary/5 text-primary font-mono-sm"
+        >
+            <span class="mr-2">Timber Console is now live</span>
+            <span class="material-symbols-outlined text-[14px]"
+                >rocket_launch</span
             >
-                <span
-                    class="h-2 w-2 animate-pulse rounded-full bg-indigo-600"
-                ></span>
-
-                <span
-                    class="text-[11px] uppercase tracking-[0.2em] text-gray-600 font-semibold"
+        </div>
+        <h1
+            class="font-display text-display md:text-6xl lg:text-[64px] text-on-surface tracking-tight leading-[1.1] mb-unit-6 mx-auto max-w-4xl"
+        >
+            Real-time application <br class="hidden md:block" />
+            monitoring for developers.
+        </h1>
+        <p
+            class="font-body-md text-on-surface-variant max-w-2xl mx-auto mb-unit-8 md:text-headline-sm leading-relaxed"
+        >
+            A lightweight, minimal console for tracking your app logs.
+            <br class="hidden md:block" />Zero configuration, high-density
+            visualization.
+        </p>
+        <div
+            class="flex flex-col sm:flex-row items-center justify-center gap-unit-4 mb-unit-8"
+        >
+            <a
+                class="w-full sm:w-auto px-unit-8 min-h-[48px] bg-primary text-on-primary font-body-md rounded-lg font-bold hover:bg-primary-container transition-all active:scale-[0.98] flex items-center justify-center gap-unit-2"
+                routerLink="/dashboard"
+            >
+                Go to Dashboard
+                <span class="material-symbols-outlined text-[18px]"
+                    >dashboard</span
                 >
-                    Building the Future of Monitoring
-                </span>
+            </a>
+            <a
+                class="w-full sm:w-auto px-unit-8 min-h-[48px] bg-transparent border border-outline text-on-surface font-body-md rounded-lg font-bold hover:bg-surface-container-high transition-all active:scale-[0.98] flex items-center justify-center gap-unit-2"
+                href="https://www.npmjs.com/package/timber-sdk"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                View on NPM
+                <span class="material-symbols-outlined text-[18px]"
+                    >terminal</span
+                >
+            </a>
+        </div>
+    </section>
+
+    <!-- Bento Section -->
+    <section class="max-w-7xl mx-auto px-4 mt-unit-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-unit-4">
+            <!-- Main Preview Card -->
+            <div
+                class="lg:col-span-8 aspect-video md:aspect-[16/9] lg:aspect-auto lg:h-[500px] border border-outline-variant rounded-xl overflow-hidden glass-panel relative group animate-in fade-in slide-in-from-bottom-2 duration-700"
+            >
+                <img
+                    alt="Technical Dashboard Interface"
+                    class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-1000"
+                    src="images/technical-dashboard-interface.png"
+                />
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent pointer-events-none"
+                ></div>
             </div>
 
-            <!-- Heading -->
-            <h1
-                class="mb-6 text-5xl font-semibold leading-tight tracking-tight md:text-7xl"
+            <!-- Side Cards -->
+            <div
+                class="lg:col-span-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-unit-4"
             >
-                Timber Dashboard is
-                <br />
-
-                <span
-                    class="bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent"
-                >
-                    Comming Soon </span
-                >.
-            </h1>
-
-            <!-- Description -->
-            <p
-                class="mx-auto mb-10 max-w-2xl text-base leading-7 text-gray-600 md:text-lg"
-            >
-                Timber's Dashboard is currently under construction.
-            </p>
-
-            <!-- Terminal Card -->
-            <div class="relative mx-auto mt-10 max-w-3xl rotate-1">
-                <!-- Floating Badge -->
-                <!-- <div
-                    class="absolute -top-4 -right-4 z-20 rotate-12 rounded-xl bg-blue-600 px-4 py-3 text-center text-white shadow-xl"
-                >
-                    <p class="text-[11px] uppercase tracking-widest">Coming</p>
-
-                    <p class="text-lg font-bold">Q4 2024</p>
-                </div> -->
-
-                <!-- Glass Panel -->
+                <!-- card 1 -->
                 <div
-                    class="overflow-hidden rounded-2xl border border-[#c7c4d7] bg-white/70 p-5 text-left shadow-2xl backdrop-blur-xl"
+                    class="border border-outline-variant rounded-xl p-unit-6 glass-panel flex flex-col justify-center animate-in fade-in slide-in-from-bottom-2 duration-700"
                 >
-                    <!-- Top Bar -->
-                    <div
-                        class="mb-4 flex items-center border-b border-[#c7c4d7] pb-3"
+                    <span
+                        class="material-symbols-outlined text-primary mb-unit-2 text-3xl"
+                        >bolt</span
                     >
-                        <div class="flex gap-2">
-                            <span
-                                class="h-3 w-3 rounded-full bg-red-300"
-                            ></span>
-                            <span
-                                class="h-3 w-3 rounded-full bg-orange-300"
-                            ></span>
-                            <span
-                                class="h-3 w-3 rounded-full bg-green-300"
-                            ></span>
-                        </div>
+                    <h3 class="font-headline-sm text-headline-sm mb-unit-1">
+                        Instant Setup
+                    </h3>
+                    <p class="font-body-sm text-on-surface-variant">
+                        Import the SDK and start tracking with just one line of
+                        code. No complex config files required.
+                    </p>
+                </div>
 
-                        <div class="ml-auto flex items-center gap-2">
-                            <span class="font-mono text-xs text-gray-500">
-                                app/logs/auth.log
-                            </span>
-                            <!-- 
-                            <span
-                                class="material-symbols-outlined text-sm text-gray-500"
-                            >
-                                lock
-                            </span> -->
-                        </div>
-                    </div>
-
-                    <!-- Terminal -->
-                    <div class="space-y-3 font-mono text-sm">
-                        <div class="flex gap-4">
-                            <span class="text-gray-400">12:04:18</span>
-
-                            <span class="font-bold text-indigo-600"
-                                >[INFO]</span
-                            >
-
-                            <span class="text-gray-600">
-                                System initialized on port 8080...
-                            </span>
-                        </div>
-
-                        <div class="flex gap-4">
-                            <span class="text-gray-400">12:04:22</span>
-
-                            <span class="font-bold text-blue-600">[DEBUG]</span>
-
-                            <span class="text-gray-600">
-                                Scanning for log agents in cluster alpha-01
-                            </span>
-                        </div>
-
-                        <div class="flex gap-4 opacity-60">
-                            <span class="text-gray-400">12:04:25</span>
-
-                            <span class="font-bold text-indigo-500"
-                                >[WAIT]</span
-                            >
-
-                            <span class="text-gray-600">
-                                Optimizing query engine for DevConsole...
-                            </span>
-                        </div>
-
-                        <div class="flex animate-pulse gap-4">
-                            <span class="text-gray-400">12:04:26</span>
-
-                            <span class="font-bold text-indigo-600">[_]</span>
-
-                            <span
-                                class="border-r-2 border-indigo-600 pr-2"
-                            ></span>
-                        </div>
-                    </div>
+                <!-- card 2 -->
+                <div
+                    class="border border-outline-variant rounded-xl p-unit-6 glass-panel flex flex-col justify-center animate-in fade-in slide-in-from-bottom-2 duration-700"
+                >
+                    <span
+                        class="material-symbols-outlined text-tertiary mb-unit-2 text-3xl"
+                        >security</span
+                    >
+                    <h3 class="font-headline-sm text-headline-sm mb-unit-1">
+                        Secure by design
+                    </h3>
+                    <p class="font-body-sm text-on-surface-variant">
+                        User data is protected through authenticated API access
+                        and secure session management.
+                    </p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+</main>
 
-        <!-- Footer -->
-        <footer
-            class="mt-20 flex w-full max-w-7xl flex-col items-center justify-between gap-6 border-t border-[#c7c4d7] pt-8 md:flex-row"
-        >
-            <!-- Links -->
-            <div class="flex items-center gap-6">
+<footer
+    class="w-full bg-surface-container py-12 px-6 border-t border-outline-variant"
+>
+    <div class="flex flex-col sm:flex-row justify-between gap-unit-8">
+        <div class="flex flex-col gap-unit-2">
+            <span
+                class="font-headline-sm font-bold text-on-surface uppercase tracking-wider"
+                >Timber Logger</span
+            >
+            <p
+                class="font-body-sm text-on-surface-variant max-w-xs leading-relaxed mb-2"
+            >
+                © 2026 Verina Khella. All rights reserved.
+            </p>
+            <div class="flex gap-unit-6">
                 <a
-                    href="https://www.linkedin.com/in/verinakhella/"
+                    class="text-on-surface-variant hover:text-on-surface transition-colors"
+                    href="https://verinak.github.io/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="font-mono text-sm text-gray-500 transition hover:text-indigo-600"
                 >
-                    LinkedIn
+                    <span class="material-symbols-outlined text-[16px]"
+                        >public</span
+                    >
                 </a>
-
                 <a
-                    href="https://github.com/verinak"
+                    class="text-on-surface-variant hover:text-on-surface transition-colors"
+                    href="mailto:verinamichelk@gmail.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="font-mono text-sm text-gray-500 transition hover:text-indigo-600"
                 >
-                    GitHub
+                    <span class="material-symbols-outlined text-[16px]"
+                        >alternate_email</span
+                    >
                 </a>
             </div>
-
-            <!-- Copyright -->
-            <div class="font-mono text-sm text-gray-500">
-                &copy; 2026 Verina Khella
-            </div>
-        </footer>
-    </main>
-</div>
+        </div>
+        <div class="flex flex-col gap-unit-2">
+            <span
+                class="font-label-caps text-on-surface-variant tracking-wider mb-2"
+                >View on GitHub</span
+            >
+            <a
+                class="font-body-sm hover:text-primary transition-colors"
+                href="https://github.com/verinak/timber-logging-dashboard"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Dashboard</a
+            >
+            <a
+                class="font-body-sm hover:text-primary transition-colors"
+                href="https://github.com/verinak/timber-logging-api"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Backend API</a
+            >
+            <a
+                class="font-body-sm hover:text-primary transition-colors"
+                href="https://github.com/verinak/timber-logging-npm"
+                target="_blank"
+                rel="noopener noreferrer"
+                >NPM Package</a
+            >
+        </div>
+    </div>
+</footer>

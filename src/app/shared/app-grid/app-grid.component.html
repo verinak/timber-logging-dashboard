@@ -1,0 +1,21 @@
+<div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-unit-4"
+>
+    @for (app of apps(); track app.name) {
+        <app-app-card [app]="app" (deleteEmitter)="handleDelete($event)" />
+    }
+    <!-- Placeholder/New App Card -->
+    <div
+        class="border-2 border-dashed border-outline-variant p-unit-4 rounded-lg flex items-center justify-center hover:border-primary hover:bg-surface-container-low transition-all cursor-pointer group min-h-[80px]"
+        (click)="openModal()"
+    >
+        <div
+            class="flex flex-col items-center text-on-surface-variant group-hover:text-primary"
+        >
+            <span class="material-symbols-outlined text-[32px] mb-unit-1"
+                >add_circle</span
+            >
+            <span class="font-body-sm text-body-sm">Add another service</span>
+        </div>
+    </div>
+</div>

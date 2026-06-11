@@ -1,13 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LandingComponent } from './pages/landing/landing.component';
+import { CreateAppDialogComponent } from './shared/create-app-dialog/create-app-dialog.component';
+import { ShowModalService } from './services/show-modal/show-modal.service';
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet, LandingComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+    selector: 'app-root',
+    imports: [RouterOutlet, CreateAppDialogComponent],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'timber-logging-dashboard';
+    title = 'timber-logging-dashboard';
+
+    private showModalService = inject(ShowModalService);
+    constructor() {}
+
+    get isModalOpen(): boolean {
+        return this.showModalService.isOpen();
+    }
 }

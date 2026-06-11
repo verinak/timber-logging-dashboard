@@ -1,1 +1,54 @@
 @import "tailwindcss";
+@config "../tailwind.config.js";
+@import "ngx-toastr/toastr";
+
+/* Geist */
+@import "@fontsource/geist";
+
+.material-symbols-outlined {
+    font-variation-settings:
+        "FILL" 0,
+        "wght" 400,
+        "GRAD" 0,
+        "opsz" 24;
+}
+
+html {
+    scrollbar-gutter: stable;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+/* toast styles */
+.toast-container .ngx-toastr {
+    @apply rounded-md border border-gray-200 border-l-4 !shadow-sm hover:!shadow-md bg-white/85 backdrop-blur-3xl text-gray-800 px-4 py-3;
+    background-image: none !important;
+    width: calc(100vw - 2rem) !important;
+    max-width: 420px !important;
+}
+
+.toast-title {
+    @apply font-semibold text-gray-900;
+}
+
+.toast-message {
+    @apply text-sm text-gray-600;
+}
+
+.toast-success {
+    @apply !border-l-green-400;
+}
+
+.toast-error {
+    @apply !border-l-red-400;
+}
+
+.toast-info {
+    @apply !border-l-indigo-400;
+}
+
+.toast-warning {
+    @apply !border-l-amber-400;
+}

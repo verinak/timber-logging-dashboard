@@ -1,0 +1,26 @@
+<article
+    class="bg-surface-container border border-outline-variant p-unit-4 rounded-lg flex items-start justify-between hover:border-primary transition-colors group"
+>
+    <div
+        class="flex gap-unit-4 overflow-hidden flex-1 cursor-pointer"
+        [routerLink]="['/dashboard/app', app.name]"
+    >
+        <div>
+            <h3
+                class="font-body-md text-body-md font-bold text-on-surface truncate"
+            >
+                {{ app.name }}
+            </h3>
+
+            <span class="text-on-surface-variant text-mono-sm font-mono-sm"
+                >Created at: {{ app.createdAt | date: "dd-MM-yyyy" }}</span
+            >
+        </div>
+    </div>
+    <button
+        class="text-on-surface-variant hover:text-error transition-colors p-unit-1"
+        (click)="onDeleteClick()"
+    >
+        <span class="material-symbols-outlined" data-icon="delete">delete</span>
+    </button>
+</article>

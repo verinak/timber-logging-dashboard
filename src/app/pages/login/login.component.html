@@ -1,0 +1,124 @@
+<div>
+    <form
+        class="space-y-6 md:space-y-unit-6"
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()"
+    >
+        <!-- Email Field -->
+        <div class="space-y-unit-2">
+            <label
+                class="block font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider"
+                for="email"
+                >Email Address</label
+            >
+            <div class="relative">
+                <input
+                    class="w-full bg-surface-container-lowest border border-outline-variant px-unit-3 py-3 md:py-unit-2 font-mono-md text-mono-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-outline-variant rounded-md min-h-[44px]"
+                    autocomplete="email"
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="name@company.com"
+                    formControlName="email"
+                />
+            </div>
+            @if (email?.touched && email?.invalid) {
+                <div class="mt-1 space-y-1 text-sm">
+                    @if (email?.errors?.["required"]) {
+                        <small
+                            class="block text-red-600 bg-red-50 border border-red-200 px-3 py-1 rounded-md"
+                        >
+                            Email is required
+                        </small>
+                    }
+                    @if (email?.errors?.["pattern"]) {
+                        <small
+                            class="block text-red-600 bg-red-50 border border-red-200 px-3 py-1 rounded-md"
+                        >
+                            Invalid email format
+                        </small>
+                    }
+                </div>
+            }
+        </div>
+        <!-- Password Field -->
+        <div class="space-y-unit-2">
+            <div class="flex justify-between items-center">
+                <label
+                    class="block font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider"
+                    for="password"
+                    >Password</label
+                >
+                <!-- <a
+                    class="font-body-sm text-body-sm text-primary hover:text-primary-container transition-colors py-1"
+                    href="#"
+                    >Forgot Password?</a
+                > -->
+            </div>
+            <div class="relative">
+                <input
+                    class="w-full bg-surface-container-lowest border border-outline-variant px-unit-3 py-3 md:py-unit-2 font-mono-md text-mono-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-outline-variant rounded-md min-h-[44px]"
+                    id="password"
+                    name="password"
+                    type="password"
+                    autocomplete="current-password"
+                    placeholder="••••••••"
+                    formControlName="password"
+                />
+            </div>
+            @if (password?.touched && password?.invalid) {
+                <div class="mt-1 space-y-1 text-sm">
+                    @if (password?.errors?.["required"]) {
+                        <small
+                            class="block text-red-600 bg-red-50 border border-red-200 px-3 py-1 rounded-md"
+                        >
+                            Password is required
+                        </small>
+                    }
+                    @if (password?.errors?.["minlength"]) {
+                        <small
+                            class="block text-red-600 bg-red-50 border border-red-200 px-3 py-1 rounded-md"
+                        >
+                            Password must be at least 6 characters
+                        </small>
+                    }
+                </div>
+            }
+        </div>
+
+        @if (error) {
+            <div class="mt-1 space-y-1 text-sm">
+                <small
+                    class="block text-red-600 bg-red-50 border border-red-200 px-3 py-1 rounded-md"
+                >
+                    {{ error }}
+                </small>
+            </div>
+        }
+
+        <!-- Action Button -->
+        <button
+            class="w-full bg-primary text-on-primary font-body-md text-body-md font-bold py-3.5 md:py-unit-3 flex items-center justify-center space-x-unit-2 hover:bg-primary-container active:scale-[0.98] transition-all rounded-lg min-h-[48px] touch-manipulation"
+            type="submit"
+        >
+            <span class="">Authenticate</span>
+            <span class="material-symbols-outlined text-[18px]"
+                >arrow_forward</span
+            >
+        </button>
+    </form>
+
+    <!-- Footer Links -->
+    <div
+        class="mt-8 md:mt-unit-8 pt-6 md:pt-unit-6 border-t border-outline-variant text-center"
+    >
+        <p class="font-body-sm text-body-sm text-on-surface-variant">
+            Don't have an account?
+            <a
+                class="text-primary font-bold hover:underline transition-all inline-block py-1"
+                routerLink="/signup"
+                >Create Account</a
+            >
+        </p>
+    </div>
+</div>
