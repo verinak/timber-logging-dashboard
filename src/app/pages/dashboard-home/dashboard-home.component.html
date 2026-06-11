@@ -3,7 +3,7 @@
     <h1
         class="font-display text-display text-on-surface text-2xl md:text-display"
     >
-        Hello, Verina
+        Hello, {{ userData.username }}
     </h1>
     <p class="text-on-surface-variant font-body-md text-body-md mt-unit-1">
         Manage your keys and registered application services.
@@ -34,32 +34,35 @@
                 </div>
             </div>
             <div
-                class="bg-surface-container-lowest border border-outline-variant rounded p-unit-3 md:p-unit-4 flex items-center justify-between group/key"
+                class="bg-surface-container-lowest border border-outline-variant rounded p-unit-3 md:p-unit-4 flex flex-col items-end sm:flex-row sm:items-center justify-between group/key"
             >
                 <code
-                    class="font-mono-md text-mono-sm md:text-mono-md text-primary truncate mr-2"
+                    class="font-mono-md text-mono-sm md:text-mono-md text-primary mr-2 flex-1 min-w-0 break-all"
                     id="api-key"
-                    >sk-••••••••••••4j2k</code
                 >
+                    {{ maskedApiKey }}
+                </code>
                 <div
                     class="flex items-center gap-unit-1 md:gap-unit-2 flex-shrink-0"
                 >
                     <button
                         class="p-unit-2 hover:bg-surface-variant rounded transition-colors text-on-surface-variant"
-                        onclick="toggleKey()"
-                        title="Reveal"
+                        type="button"
+                        (click)="showApiKey = !showApiKey"
                     >
                         <span
                             class="material-symbols-outlined"
                             data-icon="visibility"
                             id="eye-icon"
-                            >visibility</span
                         >
+                            {{ showApiKey ? "visibility_off" : "visibility" }}
+                        </span>
                     </button>
                     <button
                         class="p-unit-2 hover:bg-surface-variant rounded transition-colors text-on-surface-variant"
                         onclick="copyKey()"
-                        title="Copy"
+                        type="button"
+                        (click)="copyApiKey()"
                     >
                         <span
                             class="material-symbols-outlined"

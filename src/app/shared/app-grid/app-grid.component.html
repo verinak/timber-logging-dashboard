@@ -1,13 +1,9 @@
 <div
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-unit-4"
 >
-    <a [routerLink]="['/dashboard/app', 'app-name']"><app-app-card /></a>
-    <app-app-card />
-    <app-app-card />
-    <app-app-card />
-    <app-app-card />
-    <app-app-card />
-    <app-app-card />
+    @for (app of apps(); track app.name) {
+        <app-app-card [app]="app" (deleteEmitter)="handleDelete($event)" />
+    }
     <!-- Placeholder/New App Card -->
     <div
         class="border-2 border-dashed border-outline-variant p-unit-4 rounded-lg flex items-center justify-center hover:border-primary hover:bg-surface-container-low transition-all cursor-pointer group min-h-[80px]"
